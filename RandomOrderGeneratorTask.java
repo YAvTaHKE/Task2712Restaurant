@@ -2,9 +2,16 @@ package main;
 
 import java.util.List;
 
+/*
+Класс для случайного распределения заказов между планшетами
+ */
+
 public class RandomOrderGeneratorTask implements Runnable {
 
+    //Список планшетов
     private List<Tablet> tablets;
+
+    //Интервал между созданиями рандомных заказов
     private int interval;
 
     public RandomOrderGeneratorTask(List<Tablet> tablets, int interval) {
