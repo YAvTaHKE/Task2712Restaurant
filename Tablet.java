@@ -14,16 +14,16 @@ import java.util.logging.Logger;
 
 public class Tablet {
     //номер планшета
-    final int number;
-    static Logger logger = Logger.getLogger(Tablet.class.getName());
+    private final int number;
+    private static Logger logger = Logger.getLogger(Tablet.class.getName());
     //Общая чередь заказов
     private LinkedBlockingQueue<Order> queue;
 
-    public Tablet(int number) {
+    Tablet(int number) {
         this.number = number;
     }
 
-    public void setQueue(LinkedBlockingQueue<Order> queue) {
+    void setQueue(LinkedBlockingQueue<Order> queue) {
         this.queue = queue;
     }
 
@@ -40,7 +40,7 @@ public class Tablet {
     }
 
     //метод создает случайный заказ
-    public void createTestOrder(){
+    void createTestOrder(){
         TestOrder order = null;
         try {
             order = new TestOrder(this);
@@ -72,8 +72,6 @@ public class Tablet {
 
     @Override
     public String toString () {
-        StringBuilder sb = new StringBuilder("Tablet{number=");
-        sb.append(number + "}");
-        return sb.toString();
+        return "Tablet{number=" + number + "}";
     }
 }
