@@ -11,23 +11,23 @@ import java.util.concurrent.LinkedBlockingQueue;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-//Планшет является оповещателем официантов
+
 public class Tablet {
-    //это номер планшета
+    //номер планшета
     final int number;
     static Logger logger = Logger.getLogger(Tablet.class.getName());
-    //Очередь заказов
+    //Общая чередь заказов
     private LinkedBlockingQueue<Order> queue;
-
-    public void setQueue(LinkedBlockingQueue<Order> queue) {
-        this.queue = queue;
-    }
 
     public Tablet(int number) {
         this.number = number;
     }
 
-    //  будет создавать заказ из тех блюд, которые выберет пользователь.
+    public void setQueue(LinkedBlockingQueue<Order> queue) {
+        this.queue = queue;
+    }
+
+    //будет создавать заказ из тех блюд, которые выберет пользователь.
     public void createOrder() {
         Order order = null;
         try {
@@ -39,7 +39,7 @@ public class Tablet {
         }
     }
 
-    // метод создает случайный заказ
+    //метод создает случайный заказ
     public void createTestOrder(){
         TestOrder order = null;
         try {
@@ -55,8 +55,6 @@ public class Tablet {
     //рефакторинг повторяющегося кода
     private void refact(Order order) {
         if (!order.isEmpty()) {
-            //setChanged();
-            //notifyObservers(order);
             try {
                 queue.put(order);
             } catch (InterruptedException e) {
