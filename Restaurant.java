@@ -3,20 +3,20 @@ package main;
 import main.kitchen.Cook;
 import main.kitchen.Order;
 import main.kitchen.Waiter;
-import main.statistic.StatisticManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.LinkedBlockingQueue;
 
 public class Restaurant {
-
+    //Интервал для автоматической генерации заказов
     private static final int ORDER_CREATING_INTERVAL = 100;
+    //Очередь для заказов
     private static final LinkedBlockingQueue<Order> orderQueue = new LinkedBlockingQueue<>();
 
     public static void main(String[] args) {
 
-        //Создаем двух поваров в отдельных потоках
+        //Создаем двух поваров с поддержкой Runnable и передаем им ссылку на очередь заказов
         Cook firstCook = new Cook("Amigo");
         firstCook.setQueue(orderQueue);
 
@@ -32,7 +32,7 @@ public class Restaurant {
         secondCook.addObserver(waiter);
 
 
-        //Создаем 5 планшетов
+        //Создаем 5 планшетов и передаем им ссылку на очередь заказов
         List<Tablet> tablets = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             Tablet tablet = new Tablet(i);
@@ -40,6 +40,7 @@ public class Restaurant {
             tablets.add(tablet);
         }
 
+        //Запускаем поваров в отдельных потоках-демонах
         Thread firstCookThread = new Thread(firstCook);
         firstCookThread.setDaemon(true);
         firstCookThread.start();
@@ -53,41 +54,18 @@ public class Restaurant {
         Thread thread = new Thread(new RandomOrderGeneratorTask(tablets, ORDER_CREATING_INTERVAL));
         thread.start();
         try {
-            Thread.currentThread().sleep(100);
+            Thread.currentThread().sleep(1000);
             thread.interrupt();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
-        //15.3 создаем планшет директора и вызываем методы вывода статистики
+        //создаем планшет директора
         DirectorTablet directorTablet = new DirectorTablet();
-        directorTablet.printActiveVideoSet();
-        directorTablet.printAdvertisementProfit();
-        directorTablet.printArchivedVideoSet();
-        directorTablet.printCookWorkloading();
-
-
-        //8. В методе main класса Restaurant должен быть создан новый повар и добавлен планшету
-        // в качестве наблюдателя с помощью метода addObserver.
-
-        // tablet1.addObserver(cook); // повар, наблюдатель за планшетом ******************
-
-        //3. Пишем main.
-        //Для объекта Observable добавляем свой объект Observer. См. п.2 и описание паттерна в wikipedia
-        //Называем повара, имя не влияет на тесты. В моем варианте - это Amigo : )
-        //
-        //Сверим выводы в консоль. Пример моего вывода:
-        //Your order: [Soup] of Tablet{number=5}
-        //Start cooking - Your order: [Soup] of Tablet{number=5}
-        //
-        //4. Не забудь сразу после создания заказа и вывода информации о нем в консоль (найдите это место в коде) сделать следующее:
-        //4.1. Установить флаг setChanged()
-        //4.2. Отправить обсерверу заказ - notifyObservers(order);
-        //
-        //5. Также внесем небольшое изменение. Сделай так чтобы метод createOrder возвращал текущий заказ или null, если заказ создать не удалось.
-        // *********
-        //6. В методе main класса Restaurant должен быть создан новый официант и добавлен повару в качестве
-        // наблюдателя с помощью метода addObserver.
-
+        //вызываем методы отображения статистики
+        directorTablet.printActiveVideoSet(); //список активных роликов и оставшееся количество показов по каждому;
+        directorTablet.printAdvertisementProfit();//какую сумму заработали на рекламе, сгруппировать по дням;
+        directorTablet.printArchivedVideoSet(); //список неактивных роликов (с оставшемся количеством показов равным нулю).
+        directorTablet.printCookWorkloading(); //загрузка (рабочее время) повара, сгруппировать по дням;
     }
 }
