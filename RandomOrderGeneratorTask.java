@@ -14,7 +14,7 @@ public class RandomOrderGeneratorTask implements Runnable {
     //Интервал между созданиями рандомных заказов
     private int interval;
 
-    public RandomOrderGeneratorTask(List<Tablet> tablets, int interval) {
+    RandomOrderGeneratorTask(List<Tablet> tablets, int interval) {
         this.tablets = tablets;
         this.interval = interval;
     }

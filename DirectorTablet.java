@@ -9,14 +9,10 @@ import main.ad.Advertisement;
 import main.ad.StatisticAdvertisementManager;
 import main.statistic.StatisticManager;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
 public class DirectorTablet {
-
 
     //показывает какую сумму заработали на рекламе, сгруппировать по дням
     void printAdvertisementProfit(){
@@ -62,5 +58,4 @@ public class DirectorTablet {
             ConsoleHelper.writeMessage(ad.getName());
         }
     }
-
 }
