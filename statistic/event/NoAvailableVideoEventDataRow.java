@@ -4,8 +4,8 @@ import java.util.Date;
 
 public class NoAvailableVideoEventDataRow implements EventDataRow {
 
-    int totalDuration; //время приготовления заказа в секундах
-    Date currentDate;
+    private int totalDuration; //время приготовления заказа в секундах
+    private Date currentDate;
 
     public NoAvailableVideoEventDataRow(int totalDuration) {
         this.totalDuration = totalDuration;
@@ -24,6 +24,10 @@ public class NoAvailableVideoEventDataRow implements EventDataRow {
 
     @Override
     public int getTime() {
+        return totalDuration;
+    }
+
+    public int getTotalDuration() {
         return totalDuration;
     }
 }

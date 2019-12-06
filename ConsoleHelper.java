@@ -9,23 +9,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ConsoleHelper {
+
+    //объект для считывания с клавиатуры
+    private static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    //вывести строку в консоль
     public static void writeMessage(String message) {
         System.out.println(message);
-    }//для вывода message в консоль
-    public static BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+    }
 
-
+    //считать строку с клавиатуры
     public static String readString() {
 
         String result = "";
         try {
             result = reader.readLine();
         } catch (IOException e) {
+            e.printStackTrace();
         }
         return result;
-    } //для чтения строки с консоли
+    }
 
-    public static List<Dish> getAllDishesForOrder() { // тут делается заказ!!!
+    //просит пользователя выбрать блюдо и добавляет его в список.
+    public static List<Dish> getAllDishesForOrder() {
         //Выведи список всех блюд и попроси пользователя ввести строку - название блюда.
         //Введенное 'exit' означает завершение заказа.
         //В случае, если введенное блюдо не представлено в меню, выведи сообщение о том, что такого блюда нет
@@ -47,13 +53,5 @@ public class ConsoleHelper {
             }
         }
         return dishesOrder;
-
-    } //просит пользователя выбрать блюдо и добавляет его в список.
+    }
 }
-
-//Требования:
-//1. Метод writeMessage класса ConsoleHelper должен выводить полученную строку в консоль.
-//2. Метод readString класса ConsoleHelper должен возвращать строку считанную с консоли.
-//3. Метод getAllDishesForOrder класса ConsoleHelper должен возвращать список блюд выбранных пользователем.
-//4. В конструкторе класса Order список dishes
-// должен быть инициализирован результатом работы метода getAllDishesForOrder.

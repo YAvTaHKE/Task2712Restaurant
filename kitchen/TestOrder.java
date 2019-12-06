@@ -4,12 +4,14 @@ import main.Tablet;
 
 import java.util.ArrayList;
 
+
+//Класс наследник для формирования тестового заказа
 public class TestOrder extends Order {
 
     public TestOrder(Tablet tablet) {
         super(tablet);
     }
-
+    //Инициализирует dishes случайным списком блюд
     @Override
     protected void initDishes() {
         dishes = new ArrayList<>();
@@ -22,6 +24,5 @@ public class TestOrder extends Order {
             int dishRandom = (int) (Math.random() * allDishes.length);
             dishes.add(allDishes[dishRandom]);
         }
-
     }
 }

@@ -4,11 +4,10 @@ import main.ConsoleHelper;
 import main.statistic.StatisticManager;
 import main.statistic.event.CookedOrderEventDataRow;
 
-import java.util.List;
 import java.util.Observable;
-import java.util.Observer;
-import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
+
+//Класс повара с паттернои Observable
 public class Cook extends Observable implements Runnable{
     private String name;
     //маркер занятости повора
@@ -33,13 +32,13 @@ public class Cook extends Observable implements Runnable{
         return name;
     }
 
-    public void startCookingOrder(Order order) {
+    private void startCookingOrder(Order order) {
 
         busy = true;
 
-
         ConsoleHelper.writeMessage("Start cooking - " + order + ", cooking time " + order.getTotalCookingTime() + "min");
 
+        //Регистрируем событие
         StatisticManager.getInstance().register(
                 new CookedOrderEventDataRow(
                                             order.getTablet().toString(),
@@ -70,7 +69,6 @@ public class Cook extends Observable implements Runnable{
                     if (order != null)
                         startCookingOrder(order);
                     else break;
-
 
                 Thread.sleep(10);
             }

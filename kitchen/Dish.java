@@ -1,10 +1,10 @@
 package main.kitchen;
 
-import java.util.Arrays;
-
+//Список блюд и время готовки в минутах
 public enum Dish {
+    //Блюда
     Fish(25), Steak(30), Soup(15), Juice(5), Water(3);
-    //1.1. Измени создание элементов enum - Fish(25), Steak(30), Soup(15), Juice(5), Water(3);
+
     private int duration;
 
     Dish(int duration) {
@@ -19,15 +19,17 @@ public enum Dish {
     // Для этого в Dish создай метод public static String allDishesToString(),
     // который сформирует строку из всех блюд.
     public static String allDishesToString() {
-        String fullList = "";
-        for (Dish dish : values()
-        ) {
-            fullList += dish.toString() + ", ";
-        }
-        fullList = fullList.substring(0, fullList.length() - 2);
-        return fullList;
-    }
 
+        StringBuilder fullList = new StringBuilder();
+
+
+        for (Dish dish : values()) {
+            fullList.append(dish).append(", ");
+        }
+
+        fullList.delete(fullList.length() - 2, fullList.length());
+
+        return fullList.toString();
+    }
 }
-//5. Нам нужен класс Dish(Блюдо), создадим его в пакете kitchen.
-// Пусть это будет enum со списком блюд: Fish, Steak, Soup, Juice, Water.
+

@@ -2,12 +2,9 @@ package main.ad;
 
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
-/* Класс будет предоставлять информацию из AdvertisementStorage в нужном нам виде
-
+/* Класс синглтон будет предоставлять информацию из AdvertisementStorage в нужном нам виде
  */
 public class StatisticAdvertisementManager {
 
@@ -39,13 +36,10 @@ public class StatisticAdvertisementManager {
                 videoSet.add(ad);
             }
         }
-        Collections.sort(videoSet, new Comparator<Advertisement>() {
-            @Override
-            public int compare(Advertisement o1, Advertisement o2)
-            {
-                return o1.getName().compareToIgnoreCase(o2.getName());
-            }
-        });
+
+        //сортировать по имени
+        videoSet.sort((o1, o2) -> o1.getName().compareToIgnoreCase(o2.getName()));
+
         return videoSet;
     }
 }
