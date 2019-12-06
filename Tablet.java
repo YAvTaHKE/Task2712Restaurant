@@ -69,7 +69,7 @@ public class Tablet {
             }
         }
     }
-
+///ff
     @Override
     public String toString () {
         return "Tablet{number=" + number + "}";
