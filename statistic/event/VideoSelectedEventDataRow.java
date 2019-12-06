@@ -5,18 +5,23 @@ import main.ad.Advertisement;
 import java.util.Date;
 import java.util.List;
 
+//Событие при выборе списка видео для показа
 public class VideoSelectedEventDataRow implements EventDataRow {
-    
-    List<Advertisement> optimalVideoSet; //список видео-роликов, отобранных для показа
+
+    private  List<Advertisement> optimalVideoSet; //список видео-роликов, отобранных для показа
     private long amount;   //сумма денег в копейках
-    int totalDuration; //общая продолжительность показа отобранных рекламных роликов
-    Date currentDate;
+    private int totalDuration; //общая продолжительность показа отобранных рекламных роликов
+    private Date currentDate;
 
     public VideoSelectedEventDataRow(List<Advertisement> optimalVideoSet, long amount, int totalDuration ) {
         this.optimalVideoSet = optimalVideoSet;
         this.amount = amount;
         this.totalDuration = totalDuration;
         this.currentDate = new Date();
+    }
+
+    public List<Advertisement> getOptimalVideoSet() {
+        return optimalVideoSet;
     }
 
     @Override

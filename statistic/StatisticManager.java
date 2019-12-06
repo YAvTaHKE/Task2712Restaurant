@@ -9,19 +9,19 @@ import main.statistic.event.VideoSelectedEventDataRow;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+
+//Класс синглтон
 public class StatisticManager {
 
     private static StatisticManager ourInstance = new StatisticManager();
     private StatisticStorage statisticStorage = new StatisticStorage();
 
+    private StatisticManager() {
+    }
 
     public static StatisticManager getInstance() {
         return ourInstance;
     }
-
-    private StatisticManager() {
-    }
-
 
     public void register(EventDataRow data){
         //5. В StatisticManager создадим публичный метод void register(EventDataRow data),
@@ -32,21 +32,23 @@ public class StatisticManager {
         //Назовем его StatisticStorage.
         statisticStorage.put(data);
     }
-
+    //Внутренний класс хранилища событий
     private static class StatisticStorage{
 
         //Статистика по всем событиям
         private Map<EventType, List<EventDataRow>> storage ; // КАРТА!!!!!!!
 
-        public StatisticStorage( ) {
+
+        //4. В конструкторе StatisticStorage инициализируй хранилище данными по-умолчанию:
+        //например используя цикл, для каждого EventType добавь new ArrayList<EventDataRow>()
+        StatisticStorage( ) {
             storage =  new HashMap<>();
             for (EventType eventType: EventType.values()
             ) {
-                storage.put(eventType,new ArrayList<EventDataRow>());
+                storage.put(eventType, new ArrayList<>());
             }
-            //4. В конструкторе StatisticStorage инициализируй хранилище данными по-умолчанию:
-            //например используя цикл, для каждого EventType добавь new ArrayList<EventDataRow>()
         }
+
         private void put(EventDataRow data){
             storage.get(data.getType()).add(data); // добавляет поле data типа EventDataRow согласно одному из трех EventDataRow
         }

@@ -6,16 +6,12 @@ import java.util.Date;
 import java.util.List;
 
 public class CookedOrderEventDataRow implements EventDataRow {
-    //где - tabletName - имя планшета
-    //cookName - имя повара
-    //cookingTimeSeconds - время приготовления заказа в секундах
-    //cookingDishs - список блюд для приготовления
 
-    String tabletName;
-    private String cookName;
-    int cookingTimeSeconds;
-    List<Dish> cookingDishs;
-    Date currentDate;
+    private String tabletName; //имя планшета
+    private String cookName; //имя повара
+    private int cookingTimeSeconds; //время приготовления заказа в секундах
+    private List<Dish> cookingDishs; //список блюд для приготовления
+    private Date currentDate;
 
     public CookedOrderEventDataRow(String tabletName, String cookName, int cookingTimeSeconds, List<Dish> cookingDishs) {
         this.tabletName = tabletName;
@@ -30,6 +26,10 @@ public class CookedOrderEventDataRow implements EventDataRow {
         return EventType.COOKED_ORDER;
     }
 
+    public List<Dish> getCookingDishs() {
+        return cookingDishs;
+    }
+
     @Override
     public Date getDate() {
         return currentDate;
@@ -42,6 +42,10 @@ public class CookedOrderEventDataRow implements EventDataRow {
 
     public String getCookName(){
         return this.cookName;
+    }
+
+    public String getTabletName() {
+        return tabletName;
     }
 }
 
